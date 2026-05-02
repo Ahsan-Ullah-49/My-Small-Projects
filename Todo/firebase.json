@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": ".",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "firestore.rules",
@@ -9,7 +9,7 @@
       "**/node_modules/**"
     ],
     "rewrites": [
-      { "source": "**", "destination": "/todo-app.html" }
+      { "source": "**", "destination": "/index.html" }
     ],
     "headers": [
       {

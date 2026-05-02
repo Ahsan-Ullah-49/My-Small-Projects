@@ -15,7 +15,7 @@ export default function Sidebar({ currentView, setCurrentView }) {
       
       {/* Brand (Desktop) */}
       <div className="hidden md:block mb-8 px-2">
-        <h1 className="font-head font-bold text-3xl tracking-tight leading-none text-app-main">Task<span className="text-[#6C63FF]">Flow</span></h1>
+        <h1 className="font-head font-bold text-3xl tracking-tight leading-none text-app-main">Veli<span className="text-[#6C63FF]">tox</span></h1>
         <p className="text-[12px] text-app-sec mt-1.5 font-light tracking-wide">Productivity Suite</p>
       </div>
 

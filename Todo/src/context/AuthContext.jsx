@@ -15,12 +15,12 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currency, setCurrencyState] = useState(() => {
-    return localStorage.getItem('tf-currency') || 'PKR';
+    return localStorage.getItem('vx-currency') || 'PKR';
   });
 
   const setCurrency = (code) => {
     setCurrencyState(code);
-    localStorage.setItem('tf-currency', code);
+    localStorage.setItem('vx-currency', code);
   };
 
   useEffect(() => {

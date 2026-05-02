@@ -33,6 +33,7 @@ export default function AuthScreen() {
     try {
       await loginWithGoogle();
     } catch (err) {
+      console.error("Google Sign-In Error:", err);
       setError(err.message || 'Google Sign-In failed');
     }
   };
@@ -45,7 +46,7 @@ export default function AuthScreen() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#6C63FF] to-[#a78bfa] mb-4 shadow-lg shadow-[#6C63FF]/30">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
-          <h1 className="font-head font-bold text-[34px] tracking-tight leading-none text-app-main mb-2">Task<span className="text-[#6C63FF]">Flow</span></h1>
+          <h1 className="font-head font-bold text-[34px] tracking-tight leading-none text-app-main mb-2">Veli<span className="text-[#6C63FF]">tox</span></h1>
           <p className="text-[14px] text-app-sec font-light">The ultimate productivity ecosystem.</p>
         </div>
 

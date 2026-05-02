@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 export default function Sidebar({ currentView, setCurrentView }) {
   const [isDark, setIsDark] = useState(() => {
-    const savedTheme = localStorage.getItem('tf-theme');
+    const savedTheme = localStorage.getItem('vx-theme');
     return savedTheme ? savedTheme === 'dark' : true;
   });
 
@@ -16,7 +16,7 @@ export default function Sidebar({ currentView, setCurrentView }) {
   const toggleTheme = () => {
     const newTheme = !isDark;
     setIsDark(newTheme);
-    localStorage.setItem('tf-theme', newTheme ? 'dark' : 'light');
+    localStorage.setItem('vx-theme', newTheme ? 'dark' : 'light');
     if (newTheme) document.documentElement.classList.add('dark');
     else document.documentElement.classList.remove('dark');
   };
