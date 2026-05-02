@@ -20,7 +20,7 @@ export default function AuthScreen() {
       if (isLogin) {
         await login(email, password);
       } else {
-        await signup(email, password);
+        await signup(email, password, name);
       }
     } catch (err) {
       setError(err.message || 'Authentication failed');
@@ -34,8 +34,26 @@ export default function AuthScreen() {
       await loginWithGoogle();
     } catch (err) {
       console.error("Google Sign-In Error:", err);
-      setError(err.message || 'Google Sign-In failed');
+      if (err.code === 'auth/unauthorized-domain') {
+        setError('Error: This domain is not authorized in Firebase. Please check Authorized Domains in Firebase Console.');
+      } else {
+        setError(err.message || 'Google Sign-In failed');
+      }
     }
+  };
+
+  const { resetPassword } = useAuth();
+  const handleReset = async () => {
+    if (!email) return setError('Please enter your email first');
+    setError('');
+    setLoading(true);
+    try {
+      await resetPassword(email);
+      setError('Password reset link sent to your email!');
+    } catch (err) {
+      setError(err.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -68,10 +86,22 @@ export default function AuthScreen() {
               <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com" className="tf-input h-12 shadow-sm" required />
             </div>
             <div>
-              <label className="block text-[11px] text-app-muted font-bold tracking-[1px] uppercase mb-2 ml-1">Password</label>
+              <div className="flex items-center justify-between mb-2 ml-1">
+                <label className="block text-[11px] text-app-muted font-bold tracking-[1px] uppercase">Password</label>
+                {isLogin && (
+                  <button type="button" onClick={handleReset} className="text-[10px] font-bold text-[#6C63FF] hover:underline uppercase tracking-wider">Forgot?</button>
+                )}
+              </div>
               <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••••" className="tf-input h-12 shadow-sm" required />
             </div>
-            {error && <div className="text-[12px] text-red-500 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 font-medium animate-slide-in">{error}</div>}
+            {error && (
+              <div className={clsx(
+                "text-[12px] rounded-xl px-4 py-3 font-medium animate-slide-in border",
+                error.includes('sent') ? "text-green-500 bg-green-500/10 border-green-500/20" : "text-red-500 bg-red-500/10 border-red-500/20"
+              )}>
+                {error}
+              </div>
+            )}
             
             <button disabled={loading} type="submit" className="w-full h-12 mt-2 bg-gradient-to-r from-[#6C63FF] to-[#8079ff] text-white font-head text-[13px] font-bold tracking-wide uppercase rounded-xl shadow-lg shadow-[#6C63FF]/30 hover:shadow-[#6C63FF]/50 hover:-translate-y-0.5 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
               {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <span>{isLogin ? 'Sign In Securely' : 'Create Account'}</span>}

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { auth, googleProvider } from '../firebase';
-import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, signOut, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { CURRENCIES } from '../constants/currencies';
 
 const AuthContext = createContext();
@@ -32,7 +32,17 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
-  const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+  
+  const signup = async (email, password, displayName) => {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    if (displayName) {
+      await updateProfile(res.user, { displayName });
+    }
+    return res;
+  };
+
+  const resetPassword = (email) => sendPasswordResetEmail(auth, email);
+  
   const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
   const logout = () => signOut(auth);
 
@@ -44,6 +54,7 @@ export function AuthProvider({ children }) {
     signup,
     loginWithGoogle,
     logout,
+    resetPassword,
     currency,
     setCurrency,
     activeCurrency
