@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236C63FF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5z'/%3E%3Cpath d='M2 17l10 5 10-5'/%3E%3Cpath d='M2 12l10 5 10-5'/%3E%3C/svg%3E" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#6C63FF" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Velitox — High-Performance Productivity Suite</title>
+    <meta name="title" content="Velitox — High-Performance Productivity Suite" />
+    <meta name="description" content="Accelerate your workflow with Velitox. A premium, all-in-one productivity suite featuring task management, focus timers, notes, and expense tracking with a stunning glassmorphic UI." />
+    <meta name="keywords" content="productivity, task manager, pomodoro timer, expense tracker, notes, workflow, dashboard, react app, velitox" />
+    <meta name="author" content="Velitox Team" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://velitox-suite.web.app/" />
+    <meta property="og:title" content="Velitox — High-Performance Productivity Suite" />
+    <meta property="og:description" content="Accelerate your workflow with Velitox. A premium, all-in-one productivity suite featuring task management, focus timers, notes, and expense tracking." />
+    <meta property="og:image" content="/social-preview.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://velitox-suite.web.app/" />
+    <meta property="twitter:title" content="Velitox — High-Performance Productivity Suite" />
+    <meta property="twitter:description" content="Accelerate your workflow with Velitox. A premium, all-in-one productivity suite featuring task management, focus timers, notes, and expense tracking." />
+    <meta property="twitter:image" content="/social-preview.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+    <!-- tsParticles for background effects -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
+  </head>
+  <body>
+    <div id="tsparticles" class="fixed inset-0 z-[-1] pointer-events-none"></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.onload = () => {
+        if (typeof tsParticles !== 'undefined') {
+          const config = {
+            fpsLimit: 60,
+            particles: {
+              color: { value: "#6C63FF" },
+              links: { color: "#6C63FF", distance: 150, enable: true, opacity: 0.2, width: 1 },
+              move: { enable: true, speed: 1, direction: "none", random: true, straight: false, outModes: { default: "out" } },
+              number: { density: { enable: true, area: 800 }, value: 50 },
+              opacity: { value: 0.3 },
+              shape: { type: "circle" },
+              size: { value: { min: 1, max: 3 } }
+            },
+            detectRetina: true
+          };
+          tsParticles.load("tsparticles", config);
+          
+          // Optional: Re-load on theme change if you want specific colors
+          const observer = new MutationObserver(() => {
+             const isDark = document.documentElement.classList.contains('dark');
+             config.particles.color.value = isDark ? "#6C63FF" : "#6C63FF"; // Can vary if needed
+             tsParticles.load("tsparticles", config);
+          });
+          observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        }
+      }
+    </script>
+  </body>
+</html>

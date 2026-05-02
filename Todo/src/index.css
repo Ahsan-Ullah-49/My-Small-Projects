@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-inner: #f1f5f9;
+    --bg-hover: #e2e8f0;
+    --border-std: #e2e8f0;
+    --border-hover: #cbd5e1;
+    --text-main: #0f172a;
+    --text-sec: #475569;
+    --text-muted: #94a3b8;
+  }
+  .dark {
+    --bg-body: #05050a;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-inner: rgba(255, 255, 255, 0.02);
+    --bg-hover: rgba(255, 255, 255, 0.06);
+    --border-std: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(108, 99, 255, 0.4);
+    --text-main: #f8fafc;
+    --text-sec: #94a3b8;
+    --text-muted: #64748b;
+  }
+}
+
+body {
+  @apply bg-app-body text-app-main font-body min-h-screen antialiased transition-colors duration-300;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-body); }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
+
+/* ── Custom Inputs ── */
+@layer components {
+.tf-input {
+  @apply w-full bg-app-inner border border-app-border rounded-xl text-app-main font-body text-sm h-12 px-4 outline-none transition-all duration-200 placeholder:text-app-muted;
+}
+.tf-input:focus {
+  border-color: #6C63FF;
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.18);
+}
+
+.tf-select {
+  @apply w-full bg-app-inner border border-app-border rounded-xl text-app-main font-body text-xs sm:text-sm h-11 px-3 sm:px-4 outline-none cursor-pointer transition-all duration-200 appearance-none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888888' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+.tf-select:focus {
+  border-color: #6C63FF;
+}
+}
+
+/* ── Hide scrollbar ── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
